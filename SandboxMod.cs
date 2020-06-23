@@ -26,6 +26,17 @@ namespace SandboxMod
             LifeTime = 0;
         }
 
+        public override void ModifyWeaponDamage(Item item, ref float add, ref float mult, ref float flat)
+        {
+            if (item.summon && item.useTime > 10 && item.useAnimation > 10)
+            {
+                item.autoReuse = true;
+                item.useTime = (int)MathHelper.Max(item.useTime / 3, 10);
+                item.useAnimation = (int)MathHelper.Max(item.useAnimation / 3, 10);
+            }
+            base.ModifyWeaponDamage(item, ref add, ref mult, ref flat);
+        }
+
         public override bool Shoot(Item item, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
         {
             if (item.melee && item.noMelee)
@@ -45,6 +56,7 @@ namespace SandboxMod
         public override void MeleeEffects(Item item, Rectangle hitbox)
         {
             item.scale = 10;
+            foreach (NPC target in Main.npc) target.immune[player.whoAmI] = 0;
         }
 
         public override void OnHitNPC(Item item, NPC target, int damage, float knockback, bool crit)

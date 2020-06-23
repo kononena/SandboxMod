@@ -25,7 +25,6 @@ namespace SandboxMod.Projectiles
 			projectile.height = 48;
 			projectile.tileCollide = true;
 			projectile.sentry = true;
-			projectile.penetrate = -1;
 			projectile.timeLeft = 7200;
 			projectile.damage = 0;
 		}
@@ -49,6 +48,13 @@ namespace SandboxMod.Projectiles
         public override void AI()
         {
 			Player player = Main.player[projectile.owner];
+
+			int sum = 0;
+			foreach (Projectile proj in Main.projectile)
+            {
+				if (proj.type == projectile.type) sum++;
+            }
+			Main.NewText(sum);
 
 			if (player.dead || !player.active) projectile.timeLeft = 0;
 
