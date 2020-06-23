@@ -59,7 +59,7 @@ namespace TutorialMod
                 player.meleeDamageMult /= 10f;
                 player.statDefense += 10;
                 player.endurance += 0.1f;
-                player.aggro -= 400;
+                player.aggro += 400;
                 player.maxTurrets += player.maxMinions;
                 player.maxMinions = 0;
                 player.statLifeMax2 += 8501;
