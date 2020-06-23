@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using Steamworks;
 using System.Linq;
 
-namespace TutorialMod.Projectiles
+namespace SandboxMod.Projectiles
 {
 	public class PewPew : ModProjectile
 	{

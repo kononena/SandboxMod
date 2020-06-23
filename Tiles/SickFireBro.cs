@@ -4,7 +4,7 @@ using Terraria.ModLoader;
 using Terraria.ObjectData;
 using Microsoft.Xna.Framework;
 
-namespace TutorialMod.Tiles
+namespace SandboxMod.Tiles
 {
 	public class SickFireBro2 : ModTile
 	{

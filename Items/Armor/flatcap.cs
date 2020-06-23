@@ -3,8 +3,9 @@ using Terraria.ModLoader;
 using static Terraria.ModLoader.ModContent;
 using Terraria.ID;
 
-namespace TutorialMod.Items.Armor
+namespace SandboxMod.Items.Armor
 {
+    /*
     [AutoloadEquip(EquipType.Head)]
     public class flatcap : ModItem
     {
@@ -29,4 +30,5 @@ namespace TutorialMod.Items.Armor
             recipe.AddRecipe();
         }
     }
+    */
 }

@@ -2,7 +2,7 @@ using System;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TutorialMod.Items
+namespace SandboxMod.Items
 {
 	public class Sper : ModItem
 	{

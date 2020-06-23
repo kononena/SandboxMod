@@ -2,10 +2,10 @@ using Terraria.ID;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
-using TutorialMod.Tiles;
+using SandboxMod.Tiles;
 using static Terraria.ModLoader.ModContent;
 
-namespace TutorialMod.Items
+namespace SandboxMod.Items
 {
 	public class SickFireBro : ModItem
 	{

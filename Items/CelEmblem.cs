@@ -3,7 +3,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TutorialMod.Items
+namespace SandboxMod.Items
 {
 	public class CelRanger : ModItem
 	{

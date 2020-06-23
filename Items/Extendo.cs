@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 
-namespace TutorialMod.Items
+namespace SandboxMod.Items
 {
 	public class Extendo : ModProjectile
 	{
