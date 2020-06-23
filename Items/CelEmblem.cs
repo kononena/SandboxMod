@@ -33,7 +33,7 @@ namespace SandboxMod.Items
 
         public override void UpdateAccessory(Player player, bool hideVisual)
         {
-			player.GetModPlayer<TutorialPlayer>().celRanger = true;
+			player.GetModPlayer<SandboxPlayer>().celRanger = true;
         }
 
         public override void AddRecipes() 
@@ -72,7 +72,7 @@ namespace SandboxMod.Items
 
 		public override void UpdateAccessory(Player player, bool hideVisual)
 		{
-			player.GetModPlayer<TutorialPlayer>().fist = true;
+			player.GetModPlayer<SandboxPlayer>().fist = true;
 		}
 
 		public override void AddRecipes()

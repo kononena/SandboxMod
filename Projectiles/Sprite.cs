@@ -21,6 +21,8 @@ namespace SandboxMod.Projectiles
 		{
 			projectile.CloneDefaults(ProjectileID.ZephyrFish);
 			aiType = ProjectileID.ZephyrFish;
+			projectile.width = 26;
+			projectile.height = 44;
 		}
 
         public override bool PreAI()

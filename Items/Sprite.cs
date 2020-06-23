@@ -18,6 +18,8 @@ namespace SandboxMod.Items
 		public override void SetDefaults() 
 		{
 			item.CloneDefaults(ItemID.ZephyrFish);
+			item.width = 26;
+			item.height = 44;
 			item.shoot = ProjectileType<Projectiles.Sprite>();
 			item.buffType = BuffType<Buffs.Sprite>();
 		}
