@@ -17,6 +17,7 @@ namespace SandboxMod
         public bool celRanger;
         public bool fist;
         public bool spritePet;
+        public int halfSentries;
 
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
@@ -81,8 +82,10 @@ namespace SandboxMod
             }
             celRanger = false;
             spritePet = false;
+            player.maxTurrets += halfSentries / 2;
+            halfSentries = 0;
             LifeTime++;
-            Main.dayTime = true;
+            Main.dayTime = false;
 
             
         }
