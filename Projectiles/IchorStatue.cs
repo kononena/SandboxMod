@@ -49,13 +49,6 @@ namespace SandboxMod.Projectiles
         {
 			Player player = Main.player[projectile.owner];
 
-			int sum = 0;
-			foreach (Projectile proj in Main.projectile)
-            {
-				if (proj.type == projectile.type) sum++;
-            }
-			Main.NewText(sum);
-
 			if (player.dead || !player.active) projectile.timeLeft = 0;
 
 			if (projectile.ai[0] < 0) projectile.ai[0] = 0;
@@ -102,7 +95,7 @@ namespace SandboxMod.Projectiles
             }
 
 			if (projectile.velocity.Y >= 16f) projectile.velocity.Y = 16f;
-			else projectile.velocity.Y += 0.1f;
+			else projectile.velocity.Y += 0.3f;
         }
 
     }

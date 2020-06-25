@@ -17,6 +17,7 @@ namespace SandboxMod
         public bool celRanger;
         public bool fist;
         public bool spritePet;
+        public int halfSentries;
 
         public override void Kill(double damage, int hitDirection, bool pvp, PlayerDeathReason damageSource)
         {
@@ -39,6 +40,14 @@ namespace SandboxMod
 
         public override bool Shoot(Item item, ref Vector2 position, ref float speedX, ref float speedY, ref int type, ref int damage, ref float knockBack)
         {
+            if (item.ranged)
+            {
+                Vector2 newVelocity = new Vector2(speedX, speedY);
+                newVelocity = newVelocity.RotatedByRandom(MathHelper.ToRadians(10));
+                speedX = newVelocity.X;
+                speedY = newVelocity.Y;
+                return base.Shoot(item, ref position, ref speedX, ref speedY, ref type, ref damage, ref knockBack);
+            }
             if (item.melee && item.noMelee)
             {
                 speedX *= 2.0f;
@@ -81,6 +90,8 @@ namespace SandboxMod
             }
             celRanger = false;
             spritePet = false;
+            player.maxTurrets += halfSentries / 2;
+            halfSentries = 0;
             LifeTime++;
             Main.dayTime = true;
 
