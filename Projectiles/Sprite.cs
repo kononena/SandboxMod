@@ -19,15 +19,16 @@ namespace SandboxMod.Projectiles
 
 		public override void SetDefaults() 
 		{
-			projectile.CloneDefaults(ProjectileID.ZephyrFish);
-			aiType = ProjectileID.ZephyrFish;
+			projectile.CloneDefaults(ProjectileID.CrimsonHeart);
+			aiType = ProjectileID.CrimsonHeart;
 			projectile.width = 26;
 			projectile.height = 44;
+			projectile.light = 0;
 		}
 
         public override bool PreAI()
         {
-			Main.player[projectile.owner].zephyrfish = false;
+			Main.player[projectile.owner].crimsonHeart = false;
 			return true;
         }
 
