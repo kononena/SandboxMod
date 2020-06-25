@@ -47,9 +47,9 @@ namespace SandboxMod.Items
 			recipe.AddRecipe();
 		}
 
-		public override Vector2? HoldoutOffset()
-		{
-			return new Vector2(-item.width / 2 + 5, 0);
-		}
+        public override Vector2? HoldoutOffset()
+        {
+            return new Vector2(-5, 0);
+        }
     }
 }

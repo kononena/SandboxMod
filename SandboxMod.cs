@@ -42,6 +42,13 @@ namespace SandboxMod
         {
             if (item.ranged)
             {
+                Main.NewText(item.ammo);
+                if (item.ammo == 0)
+                {
+                    Main.NewText("get slowed", Color.Blue);
+                    speedX /= 100;
+                    speedY /= 100;
+                }
                 Vector2 newVelocity = new Vector2(speedX, speedY);
                 newVelocity = newVelocity.RotatedByRandom(MathHelper.ToRadians(10));
                 speedX = newVelocity.X;
@@ -87,6 +94,8 @@ namespace SandboxMod
                 player.statLifeMax2 += 8501;
                 player.lifeRegen += 100;
                 player.blockRange += 40;
+                player.manaRegen += 400;
+                player.statManaMax2 += 3000;
             }
             celRanger = false;
             spritePet = false;
@@ -94,8 +103,6 @@ namespace SandboxMod
             halfSentries = 0;
             LifeTime++;
             Main.dayTime = true;
-
-            
         }
     }
 
@@ -112,11 +119,11 @@ namespace SandboxMod
             recipe.AddRecipe();
 
             recipe = new ModRecipe(this);
-            recipe.SetResult(ItemID.PossessedHatchet);
+            recipe.SetResult(ItemID.Musket);
             recipe.AddRecipe();
 
             recipe = new ModRecipe(this);
-            recipe.SetResult(ItemID.QueenSpiderStaff);
+            recipe.SetResult(ItemID.ChlorophyteBullet);
             recipe.AddRecipe();
 
             base.AddRecipes();
