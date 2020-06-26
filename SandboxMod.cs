@@ -6,8 +6,6 @@ using Terraria.ID;
 using static Terraria.ModLoader.ModContent;
 using SandboxMod.Items;
 using SandboxMod.Projectiles;
-using SandboxMod.Tiles;
-using System.Linq;
 
 namespace SandboxMod
 {
@@ -42,13 +40,6 @@ namespace SandboxMod
         {
             if (item.ranged)
             {
-                Main.NewText(item.ammo);
-                if (item.ammo == 0)
-                {
-                    Main.NewText("get slowed", Color.Blue);
-                    speedX /= 100;
-                    speedY /= 100;
-                }
                 Vector2 newVelocity = new Vector2(speedX, speedY);
                 newVelocity = newVelocity.RotatedByRandom(MathHelper.ToRadians(10));
                 speedX = newVelocity.X;
@@ -103,6 +94,7 @@ namespace SandboxMod
             halfSentries = 0;
             LifeTime++;
             Main.dayTime = true;
+            base.ResetEffects();
         }
     }
 

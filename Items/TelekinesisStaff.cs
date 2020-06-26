@@ -12,12 +12,13 @@ namespace SandboxMod.Items
 		public override void SetStaticDefaults()
 		{
 			Tooltip.SetDefault("Grants the ability to move small non-boss NPC");
+			Item.staff[item.type] = true;
 		}
 
 		public override void SetDefaults()
 		{
 			item.magic = true;
-			item.mana = 3;
+			item.mana = 5;
 			item.width = 68;
 			item.height = 26;
 			item.useTime = 30;
@@ -46,10 +47,5 @@ namespace SandboxMod.Items
 			recipe.SetResult(this);
 			recipe.AddRecipe();
 		}
-
-        public override Vector2? HoldoutOffset()
-        {
-            return new Vector2(-5, 0);
-        }
     }
 }
