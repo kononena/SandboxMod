@@ -10,9 +10,7 @@ namespace SandboxMod.Items
 {
 	public class TornadoStaff : ModItem
 	{
-		public override string Texture => "Terraria/Item_" + ItemID.ShadowbeamStaff;
-
-        public override void SetStaticDefaults()
+		public override void SetStaticDefaults()
 		{
 			Tooltip.SetDefault("Shoots a tornado that traps NPCs");
 			Item.staff[item.type] = true;
