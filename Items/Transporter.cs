@@ -1,5 +1,4 @@
 using Terraria.ID;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ModLoader;
 using SandboxMod.Tiles;
@@ -9,11 +8,9 @@ namespace SandboxMod.Items
 {
 	public class Transporter : ModItem
 	{
-		public override string Texture => "Terraria/Item_" + ItemID.Teleporter;
-
-        public override void SetStaticDefaults()
+		public override void SetStaticDefaults()
         {
-			Tooltip.SetDefault("bruh dont try this at home");
+			Tooltip.SetDefault("Teleport to this transporter with the Transporter Key");
         }
 
         public override void SetDefaults()
@@ -27,14 +24,17 @@ namespace SandboxMod.Items
 			item.useTime = 10;
 			item.useStyle = ItemUseStyleID.SwingThrow;
 			item.consumable = true;
-			item.rare = ItemRarityID.Blue;
-			item.value = Item.sellPrice(gold: 1);
+			item.rare = ItemRarityID.White;
+			item.value = Item.sellPrice(silver: 50);
 			item.createTile = TileType<Tiles.Transporter>();
 		}
 
         public override void AddRecipes()
         {
 			ModRecipe rec = new ModRecipe(mod);
+			rec.AddIngredient(ItemID.Teleporter);
+			rec.AddIngredient(ItemID.MartianConduitPlating, 10);
+			rec.AddTile(TileID.MythrilAnvil);
 			rec.SetResult(this);
 			rec.AddRecipe();
         }

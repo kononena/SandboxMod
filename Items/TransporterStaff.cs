@@ -5,20 +5,18 @@ using static Terraria.ModLoader.ModContent;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
-using System.Runtime.Remoting.Messaging;
 
 namespace SandboxMod.Items
 {
 	public class TransporterStaff : ModItem
 	{
-		public override string Texture => "Terraria/Item_" + ItemID.SharkFin;
-
-        public override void SetStaticDefaults()
+		public override void SetStaticDefaults()
         {
+			DisplayName.SetDefault("Transporter Key");
 			Tooltip.SetDefault("Teleports you to the chosen transporter" +
-				"Right-click to cycle between transporters" +
-				"Left-click to teleport" +
-				"Throw and pick up item to update world transporters");
+				"\nIf bugged, right-click in inventory to reset" +
+				"\nRight-click to cycle between transporters" +
+				"\nLeft-click to teleport");
         }
 
         public override void SetDefaults()
@@ -27,30 +25,34 @@ namespace SandboxMod.Items
 			item.height = 20;
 			item.useTurn = true;
 			item.autoReuse = false;
-			item.useAnimation = 30;
-			item.useTime = 30;
-			item.useStyle = ItemUseStyleID.SwingThrow;
-			item.rare = ItemRarityID.Blue;
-			item.value = Item.sellPrice(gold: 1);
+			item.useAnimation = 15;
+			item.useTime = 15;
+			item.useStyle = ItemUseStyleID.HoldingUp;
+			item.rare = ItemRarityID.Cyan;
+			item.value = Item.sellPrice(gold: 6);
 		}
 
-        public override bool OnPickup(Player player)
+		public override bool CanRightClick() => true;
+
+        public override void RightClick(Player player)
         {
-			var modPlayer = player.GetModPlayer<SandboxPlayer>();
-			modPlayer.UpdateTransporters();
-			if (modPlayer.transporterLocations.Count > 0) modPlayer.chosenTransporter = modPlayer.transporterLocations.Keys.First();
-			return true;
+			player.PutItemInInventory(item.type);
         }
 
         public override bool AltFunctionUse(Player player) => true;
 
 		public override bool UseItem(Player player)
 		{
-			var locations = player.GetModPlayer<SandboxPlayer>().transporterLocations;
-			var choice = Main.LocalPlayer.GetModPlayer<SandboxPlayer>().chosenTransporter;
+			var modPlayer = player.GetModPlayer<SandboxPlayer>();
+			var locations = modPlayer.transporterLocations;
+			var choice = modPlayer.chosenTransporter;
 			if (locations.Count <= 0) return false;
 
-			if (choice == (0, 0)) choice = locations.Keys.First();
+			if (choice == (0, 0))
+			{
+				choice = locations.Keys.First();
+				Main.LocalPlayer.GetModPlayer<SandboxPlayer>().chosenTransporter = choice;
+			}
 
 			#region Choosing Transporter
 			if (player.altFunctionUse == 2)
@@ -63,7 +65,7 @@ namespace SandboxMod.Items
 				}
 				else choice = transXY[0];
 
-				Main.LocalPlayer.GetModPlayer<SandboxPlayer>().chosenTransporter = choice;
+				modPlayer.chosenTransporter = choice;
 			}
 			#endregion
 			#region Teleport Somewhere
@@ -89,20 +91,28 @@ namespace SandboxMod.Items
 
 		public override void ModifyTooltips(List<TooltipLine> tooltips)
 		{
-			var locations = Main.LocalPlayer.GetModPlayer<SandboxPlayer>().transporterLocations;
-			var choice = Main.LocalPlayer.GetModPlayer<SandboxPlayer>().chosenTransporter;
-
+			var modPlayer = Main.LocalPlayer.GetModPlayer<SandboxPlayer>();
+			var locations = modPlayer.transporterLocations;
+			var choice = modPlayer.chosenTransporter;
 
 			if (locations.Count > 0)
 			{
-				if (!locations.ContainsKey(choice)) tooltips.Add(new TooltipLine(mod, "TransporterChoice", "No transporter selected"));
-				else tooltips.Add(new TooltipLine(mod, "TransporterChoice", "Current transporter: " + locations[choice]));
+				if (choice == (0, 0))
+                {
+					modPlayer.chosenTransporter = modPlayer.transporterLocations.First().Key;
+					tooltips.Add(new TooltipLine(mod, "TransporterChoice", "Current transporter: " + locations.First()));
+				}
+				else if (locations.ContainsKey(choice)) tooltips.Add(new TooltipLine(mod, "TransporterChoice", "Current transporter: " + locations[choice]));
+				else tooltips.Add(new TooltipLine(mod, "TransporterChoice", "No transporter selected"));
 			}
 		}
 
 		public override void AddRecipes()
         {
 			ModRecipe rec = new ModRecipe(mod);
+			rec.AddIngredient(ItemID.CosmicCarKey);
+			rec.AddIngredient(ItemID.Teleporter, 2);
+			rec.AddTile(TileID.MythrilAnvil);
 			rec.SetResult(this);
 			rec.AddRecipe();
         }

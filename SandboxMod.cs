@@ -7,6 +7,8 @@ using static Terraria.ModLoader.ModContent;
 using SandboxMod.Items;
 using SandboxMod.Projectiles;
 using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace SandboxMod
 {
@@ -37,6 +39,19 @@ namespace SandboxMod
                         if (transporterLocationNames.ContainsKey((x, y))) transporterLocations.Add((x, y), transporterLocationNames[(x, y)]);
                         else transporterLocations.Add((x, y), index++.ToString());
                     }
+                }
+            }
+        }
+
+        public void RenameIntegerTransporters()
+        {
+            int index = 1;
+            var orderedTransporters = transporterLocations.OrderBy(valPair => valPair.Key.x);
+            foreach (var valPair in orderedTransporters)
+            {
+                if (Int32.TryParse(valPair.Value, out int prevIndex))
+                {
+                    transporterLocations[valPair.Key] = index++.ToString();
                 }
             }
         }
